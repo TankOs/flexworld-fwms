@@ -37,18 +37,25 @@ std::size_t Router::get_queue_size() const {
 }
 
 void Router::process_queue() {
-	boost::lock_guard<boost::mutex> lock( m_mutex );
-
-	std::size_t num_messages = m_messages.size();
+	std::shared_ptr<const Message> message;
 	std::size_t num_readers = m_readers.size();
 
-	for( std::size_t message_idx = 0; message_idx < num_messages; ++message_idx ) {
+	while( true ) {
+		{
+			boost::lock_guard<boost::mutex> lock( m_mutex );
+
+			if( m_messages.size() == 0 ) {
+				break;
+			}
+
+			message = m_messages.front();
+			m_messages.pop_front();
+		}
+
 		for( std::size_t reader_idx = 0; reader_idx < num_readers; ++reader_idx ) {
-			m_readers[reader_idx]->pass_message( *m_messages[message_idx] );
+			m_readers[reader_idx]->pass_message( *message );
 		}
 	}
-
-	m_messages.clear();
 }
 
 }
