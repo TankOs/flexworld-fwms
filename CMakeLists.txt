@@ -1,6 +1,8 @@
 cmake_minimum_required( VERSION 2.8 )
 project( FWMS )
 
+find_package( Boost 1.48 REQUIRED thread )
+
 set( FWMS_BUILD_SHARED_LIBS TRUE CACHE BOOL "Build shared libraries." )
 set( FWMS_BUILD_TEST TRUE CACHE BOOL "Build test suite." )
 #set( FWMS_BUILD_EXAMPLES TRUE CACHE BOOL "Build examples." )
@@ -48,8 +50,11 @@ set(
 )
 
 include_directories( ${INC_DIR} )
+include_directories( ${Boost_INCLUDE_DIR} )
 
 add_library( fwms ${LIB_TYPE} ${SOURCES} )
+
+target_link_libraries( fwms ${Boost_THREAD_LIBRARY} )
 
 if( NOT FWMS_SKIP_INSTALL )
 	install(

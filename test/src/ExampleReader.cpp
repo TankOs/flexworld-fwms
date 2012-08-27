@@ -15,7 +15,8 @@ ExampleReader::ExampleReader() :
 	num_handled_messages( 0 ),
 	num_unhandled_messages( 0 ),
 	num_a_messages( 0 ),
-	num_c_messages( 0 )
+	num_c_messages( 0 ),
+	property_checks_enabled( true )
 {
 }
 
@@ -23,22 +24,26 @@ void ExampleReader::handle_message( const ms::Message& message ) {
 	ms::HashValue id = message.get_id();
 
 	if( id == MSGA_ID ) {
-		const float* property = message.find_property<float>( FLOAT_PROP_ID );
-		BOOST_CHECK( property != nullptr );
+		if( property_checks_enabled ) {
+			const float* property = message.find_property<float>( FLOAT_PROP_ID );
+			BOOST_CHECK( property != nullptr );
 
-		if( property != nullptr ) {
-			BOOST_CHECK( *property == 123.4f );
+			if( property != nullptr ) {
+				BOOST_CHECK( *property == 123.4f );
+			}
 		}
 
 		++num_a_messages;
 		++num_handled_messages;
 	}
 	else if( id == MSGC_ID ) {
-		const int* property = message.find_property<int>( INT_PROP_ID );
-		BOOST_CHECK( property != nullptr );
+		if( property_checks_enabled ) {
+			const int* property = message.find_property<int>( INT_PROP_ID );
+			BOOST_CHECK( property != nullptr );
 
-		if( property != nullptr ) {
-			BOOST_CHECK( *property == 1234 );
+			if( property != nullptr ) {
+				BOOST_CHECK( *property == 1234 );
+			}
 		}
 
 		++num_c_messages;

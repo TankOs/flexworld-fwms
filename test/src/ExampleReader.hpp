@@ -19,5 +19,6 @@ class ExampleReader : public ms::Reader {
 		std::size_t num_unhandled_messages;
 		std::size_t num_a_messages;
 		std::size_t num_c_messages;
+		bool property_checks_enabled;
 };
 
