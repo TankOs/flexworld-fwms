@@ -32,11 +32,13 @@ set(
 	${INC_DIR}/FWMS/Hash.hpp
 	${INC_DIR}/FWMS/Message.hpp
 	${INC_DIR}/FWMS/Message.inl
+	${INC_DIR}/FWMS/NonCopyable.hpp
 	${INC_DIR}/FWMS/Property.hpp
 	${INC_DIR}/FWMS/Property.inl
 	${SRC_DIR}/FWMS/Config.cpp
 	${SRC_DIR}/FWMS/Hash.cpp
 	${SRC_DIR}/FWMS/Message.cpp
+	${SRC_DIR}/FWMS/NonCopyable.cpp
 	${SRC_DIR}/FWMS/Property.cpp
 )
 

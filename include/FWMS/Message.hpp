@@ -2,6 +2,7 @@
 
 #include <FWMS/Property.hpp>
 #include <FWMS/Hash.hpp>
+#include <FWMS/NonCopyable.hpp>
 
 #include <map>
 #include <string>
@@ -19,7 +20,7 @@ class Property;
  * being used.
  */
 
-class Message {
+class Message : public NonCopyable {
 	public:
 		/** Ctor.
 		 * @param id ID.

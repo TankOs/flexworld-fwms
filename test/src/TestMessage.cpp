@@ -6,6 +6,9 @@ BOOST_AUTO_TEST_CASE( TestMessage ) {
 	using namespace ms;
 
 	static const HashValue ID = string_hash( "foobar" );
+	static const HashValue FLOAT_PROP_ID = string_hash( "float" );
+	static const HashValue INT_PROP_ID = string_hash( "int" );
+	static const HashValue STRING_PROP_ID = string_hash( "string" );
 
 	// Initial state.
 	{
@@ -17,10 +20,6 @@ BOOST_AUTO_TEST_CASE( TestMessage ) {
 
 	// Properties.
 	{
-		static const HashValue FLOAT_PROP_ID = string_hash( "float" );
-		static const HashValue INT_PROP_ID = string_hash( "int" );
-		static const HashValue STRING_PROP_ID = string_hash( "string" );
-
 		Message message( ID );
 
 		message.set_property<float>( FLOAT_PROP_ID, 40.0f );
