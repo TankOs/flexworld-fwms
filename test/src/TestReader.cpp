@@ -3,6 +3,7 @@
 #include <FWMS/Reader.hpp>
 #include <FWMS/Message.hpp>
 #include <FWMS/Hash.hpp>
+#include <FWMS/Router.hpp>
 
 #include <boost/test/unit_test.hpp>
 
@@ -17,6 +18,18 @@ BOOST_AUTO_TEST_CASE( TestReader ) {
 		BOOST_CHECK( reader.num_unhandled_messages == 0 );
 		BOOST_CHECK( reader.num_a_messages == 0 );
 		BOOST_CHECK( reader.num_c_messages == 0 );
+	}
+
+	// Basic properties.
+	{
+		Router router;
+		ExampleReader reader;
+
+		reader.set_router( &router );
+		BOOST_CHECK( reader.get_router() == &router );
+
+		reader.set_router( nullptr );
+		BOOST_CHECK( reader.get_router() == nullptr );
 	}
 
 	// Send messages.

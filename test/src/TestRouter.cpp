@@ -24,6 +24,9 @@ BOOST_AUTO_TEST_CASE( TestRouter ) {
 
 		BOOST_CHECK( router.get_num_readers() == 2 );
 		BOOST_CHECK( &reader_a != &reader_b );
+
+		BOOST_CHECK( reader_a.get_router() == &router );
+		BOOST_CHECK( reader_b.get_router() == &router );
 	}
 
 	// Enqueue messages.
