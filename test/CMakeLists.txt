@@ -15,6 +15,7 @@ set(
 	${SRC_DIR}/Test.cpp
 	${SRC_DIR}/TestMessage.cpp
 	${SRC_DIR}/TestProperty.cpp
+	${SRC_DIR}/TestReader.cpp
 )
 
 include_directories( ${PROJECT_SOURCE_DIR}/../include )
