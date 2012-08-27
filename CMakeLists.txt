@@ -36,12 +36,15 @@ set(
 	${INC_DIR}/FWMS/Property.hpp
 	${INC_DIR}/FWMS/Property.inl
 	${INC_DIR}/FWMS/Reader.hpp
+	${INC_DIR}/FWMS/Router.hpp
+	${INC_DIR}/FWMS/Router.inl
 	${SRC_DIR}/FWMS/Config.cpp
 	${SRC_DIR}/FWMS/Hash.cpp
 	${SRC_DIR}/FWMS/Message.cpp
 	${SRC_DIR}/FWMS/NonCopyable.cpp
 	${SRC_DIR}/FWMS/Property.cpp
 	${SRC_DIR}/FWMS/Reader.cpp
+	${SRC_DIR}/FWMS/Router.cpp
 )
 
 include_directories( ${INC_DIR} )

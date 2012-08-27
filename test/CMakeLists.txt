@@ -12,10 +12,13 @@ set( INC_DIR "src" )
 
 set(
 	SOURCES
+	${INC_DIR}/ExampleReader.hpp
+	${SRC_DIR}/ExampleReader.cpp
 	${SRC_DIR}/Test.cpp
 	${SRC_DIR}/TestMessage.cpp
 	${SRC_DIR}/TestProperty.cpp
 	${SRC_DIR}/TestReader.cpp
+	${SRC_DIR}/TestRouter.cpp
 )
 
 include_directories( ${PROJECT_SOURCE_DIR}/../include )
