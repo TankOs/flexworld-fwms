@@ -61,6 +61,11 @@ if( NOT FWMS_SKIP_INSTALL )
 		LIBRARY DESTINATION lib COMPONENT bin
 		ARCHIVE DESTINATION lib COMPONENT dev
 	)
+
+	install(
+		DIRECTORY include/FWMS
+		DESTINATION include
+	)
 endif()
 
 if( FWMS_BUILD_TEST )
