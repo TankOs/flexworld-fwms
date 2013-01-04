@@ -2,7 +2,6 @@
 
 #include <FWMS/Property.hpp>
 #include <FWMS/Hash.hpp>
-#include <FWMS/NonCopyable.hpp>
 
 #include <map>
 #include <string>
@@ -20,7 +19,7 @@ class Property;
  * being used.
  */
 
-class Message : public NonCopyable {
+class Message {
 	public:
 		/** Ctor.
 		 * @param id ID.
@@ -30,6 +29,16 @@ class Message : public NonCopyable {
 		/** Dtor.
 		 */
 		~Message();
+
+		/** Copy ctor.
+		 * @param other Other.
+		 */
+		Message( const Message& other ) = delete;
+
+		/** Assignment.
+		 * @param other Other.
+		 */
+		Message& operator=( const Message& other ) = delete;
 
 		/** Get ID.
 		 * @return ID.
