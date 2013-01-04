@@ -33,7 +33,7 @@ find_path(
 
 find_library(
 	FWMS_LIBRARY_RELEASE
-	FWMS${FWMS_SUFFIX}
+	fwms${FWMS_SUFFIX}
 	PATH_SUFFIXES
 		lib
 		lib64
