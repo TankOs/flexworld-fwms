@@ -54,6 +54,15 @@ add_library( fwms ${LIB_TYPE} ${SOURCES} )
 
 target_link_libraries( fwms ${Boost_THREAD_LIBRARY} )
 
+if( FWMS_BUILD_SHARED_LIBS )
+	set_target_properties( fwms PROPERTIES DEBUG_POSTFIX -d )
+else()
+	set_target_properties( fwms PROPERTIES DEBUG_POSTFIX -s-d )
+	set_target_properties( fwms PROPERTIES RELEASE_POSTFIX -s )
+	set_target_properties( fwms PROPERTIES MINSIZEREL_POSTFIX -s )
+endif()
+
+
 if( NOT FWMS_SKIP_INSTALL )
 	install(
 		TARGETS fwms
