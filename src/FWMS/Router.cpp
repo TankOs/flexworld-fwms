@@ -1,6 +1,7 @@
 #include <FWMS/Router.hpp>
 #include <FWMS/Reader.hpp>
 
+
 namespace ms {
 
 Router::Router() {
@@ -19,7 +20,7 @@ std::size_t Router::get_num_readers() const {
 }
 
 void Router::enqueue_message( std::shared_ptr<const Message> message ) {
-	boost::lock_guard<boost::mutex> lock( m_mutex );
+	std::lock_guard<std::mutex> lock( m_mutex );
 
 	m_messages.push_back( message );
 }
@@ -28,7 +29,7 @@ std::size_t Router::get_queue_size() const {
 	std::size_t size = 0;
 
 	{
-		boost::lock_guard<boost::mutex> lock( m_mutex );
+		std::lock_guard<std::mutex> lock( m_mutex );
 
 		size = m_messages.size();
 	}
@@ -42,7 +43,7 @@ void Router::process_queue() {
 
 	while( true ) {
 		{
-			boost::lock_guard<boost::mutex> lock( m_mutex );
+			std::lock_guard<std::mutex> lock( m_mutex );
 
 			if( m_messages.size() == 0 ) {
 				break;

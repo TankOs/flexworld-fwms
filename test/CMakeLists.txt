@@ -1,7 +1,7 @@
 cmake_minimum_required( VERSION 2.8 )
 project( FWMS-test )
 
-find_package( Boost 1.46 REQUIRED thread unit_test_framework )
+find_package( Boost 1.46 REQUIRED unit_test_framework )
 
 if( NOT Boost_USE_STATIC_LIBS )
 	add_definitions( -DBOOST_TEST_DYN_LINK )
@@ -27,7 +27,6 @@ include_directories( ${Boost_INCLUDE_DIRS} )
 add_executable( test ${SOURCES} )
 
 target_link_libraries( test ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY} )
-target_link_libraries( test ${Boost_THREAD_LIBRARY} )
 target_link_libraries( test fwms )
 
 add_custom_command(

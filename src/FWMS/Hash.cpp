@@ -2,6 +2,6 @@
 
 namespace ms {
 
-boost::hash<std::string> string_hash = boost::hash<std::string>();
+std::hash<std::string> string_hash = std::hash<std::string>();
 
 }

@@ -3,8 +3,7 @@
 #include <vector>
 #include <memory>
 #include <deque>
-
-#include <boost/thread/mutex.hpp>
+#include <mutex>
 
 namespace ms {
 
@@ -60,7 +59,7 @@ class Router {
 		ReaderArray m_readers;
 		MessageDeque m_messages;
 
-		mutable boost::mutex m_mutex;
+		mutable std::mutex m_mutex;
 };
 
 }

@@ -1,8 +1,6 @@
 cmake_minimum_required( VERSION 2.8 )
 project( FWMS )
 
-find_package( Boost 1.48 REQUIRED thread system )
-
 set( FWMS_BUILD_SHARED_LIBS TRUE CACHE BOOL "Build shared libraries." )
 set( FWMS_BUILD_TEST TRUE CACHE BOOL "Build test suite." )
 #set( FWMS_BUILD_EXAMPLES TRUE CACHE BOOL "Build examples." )
@@ -17,7 +15,7 @@ endif()
 
 if( CMAKE_COMPILER_IS_GNUCXX )
 	if( NOT CMAKE_CXX_FLAGS )
-		set( CMAKE_CXX_FLAGS "-std=c++0x -Wall -Wextra -Wshadow -Wconversion -pedantic" CACHE STRING "C++ compiler flags." FORCE )
+		set( CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wextra -Wshadow -Wconversion -pedantic" CACHE STRING "C++ compiler flags." FORCE )
 	endif()
 endif()
 
@@ -48,11 +46,7 @@ set(
 )
 
 include_directories( ${INC_DIR} )
-include_directories( ${Boost_INCLUDE_DIR} )
-
 add_library( fwms ${LIB_TYPE} ${SOURCES} )
-
-target_link_libraries( fwms ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} )
 
 if( FWMS_BUILD_SHARED_LIBS )
 	set_target_properties( fwms PROPERTIES DEBUG_POSTFIX -d )
