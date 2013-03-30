@@ -11,10 +11,15 @@ class Reader;
 class Message;
 
 /** Router.
- * The router creates readers and passes message to all registered ones.
+ * The router delivers messages to all registered reader functions.
  */
 class Router {
 	public:
+		typedef
+			std::function<void( const Message& )>
+			ReaderFunction
+		; ///< Reader function type.
+
 		/** Ctor.
 		 */
 		Router();
@@ -28,12 +33,16 @@ class Router {
 		 */
 		std::size_t get_num_readers() const;
 
-		/** Create reader.
-		 * @tparam T Reader type.
-		 * @return Created reader (also stored internally in router).
+		/** Add reader.
+		 * @param reader Reader.
+		 * @return Unique reader ID.
 		 */
-		template <class T>
-		T& create_reader();
+		uint32_t add_reader( ReaderFunction reader );
+
+		/** Remove previously added reader.
+		 * @param id Reader ID (must be valid).
+		 */
+		void remove_reader( uint32_t id );
 
 		/** Enqueue a message.
 		 * The message will be held in a queue until process_queue() is called.
@@ -53,15 +62,16 @@ class Router {
 		void process_queue();
 
 	private:
-		typedef std::vector<Reader*> ReaderArray;
+		typedef std::pair<uint32_t, ReaderFunction> IDReaderPair;
+		typedef std::vector<IDReaderPair> ReaderArray;
 		typedef std::deque<std::shared_ptr<const Message>> MessageDeque;
 
 		ReaderArray m_readers;
 		MessageDeque m_messages;
 
+		uint32_t m_next_reader_id;
+
 		mutable std::mutex m_mutex;
 };
 
 }
-
-#include "Router.inl"
