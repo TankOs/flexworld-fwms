@@ -11,7 +11,7 @@ void Message::set_property( HashValue id, const T& value ) {
 	else {
 #ifndef NDEBUG
 		ConcreteProperty<T>* c_prop = dynamic_cast<ConcreteProperty<T>*>( prop_iter->second );
-		assert( c_prop != nullptr );
+		assert( c_prop != nullptr && "Property found but type mismatched." );
 #else
 		ConcreteProperty<T>* c_prop = reinterpret_cast<ConcreteProperty<T>*>( prop_iter->second );
 #endif
@@ -29,7 +29,7 @@ const T* Message::find_property( HashValue id ) const {
 		const ConcreteProperty<T>* c_prop = dynamic_cast<const ConcreteProperty<T>*>(
 			prop_iter->second
 		);
-		assert( c_prop != nullptr );
+		assert( c_prop != nullptr && "Property found but type mismatched." );
 
 		return &c_prop->get_value();
 #else
